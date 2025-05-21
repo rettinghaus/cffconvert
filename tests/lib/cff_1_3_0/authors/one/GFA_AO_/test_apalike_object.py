@@ -37,13 +37,10 @@ class TestApalikeObject(Contract):
         assert actual_apalike == expected_apalike
 
     def test_title(self):
-        assert apalike_object().add_title().title == "the title"
+        assert apalike_object().add_title().title == "the title."
 
     def test_url(self):
         assert apalike_object().add_url().url is None
-
-    def test_version(self):
-        assert apalike_object().add_version().version is None
 
     def test_year(self):
         assert apalike_object().add_year().year is None

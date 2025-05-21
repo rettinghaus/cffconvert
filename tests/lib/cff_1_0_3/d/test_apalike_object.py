@@ -37,13 +37,10 @@ class TestApalikeObject(Contract):
         assert apalike_object().add_doi().doi == "DOI: 10.5281/zenodo.1162057"
 
     def test_title(self):
-        assert apalike_object().add_title().title == "cffconvert"
+        assert apalike_object().add_title().title == "cffconvert (version 1.0.1)."
 
     def test_url(self):
         assert apalike_object().add_url().url == "URL: https://github.com/citation-file-format/cffconvert"
-
-    def test_version(self):
-        assert apalike_object().add_version().version == "(version 1.0.1)."
 
     def test_year(self):
         assert apalike_object().add_year().year == "(2018)."

@@ -37,13 +37,10 @@ class TestApalikeObject(Contract):
         assert apalike_object().add_doi().doi == "DOI: 10.5281/zenodo.1003346"
 
     def test_title(self):
-        assert apalike_object().add_title().title == "spot"
+        assert apalike_object().add_title().title == "spot (version 0.1.0)."
 
     def test_url(self):
         assert apalike_object().add_url().url == "URL: https://github.com/NLeSC/spot"
-
-    def test_version(self):
-        assert apalike_object().add_version().version == "(version 0.1.0)."
 
     def test_year(self):
         assert apalike_object().add_year().year == "(2017)."
