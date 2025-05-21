@@ -25,6 +25,8 @@ class ApalikeObject(Shared):
             self.author = ", ".join(authors_apalike_filtered[:-1]) + " and " + authors_apalike_filtered[-1]
         else:
             self.author = ", ".join(authors_apalike_filtered[:-1]) + ", and " + authors_apalike_filtered[-1]
+        if self.author[-1] != ".":
+            self.author += "."
         return self
 
     def add_year(self):
