@@ -20,7 +20,7 @@ def apalike_object():
 class TestApalikeObject(Contract):
 
     def test_author(self):
-        assert apalike_object().add_author().author == "von der Spaaks Jr. J. H."
+        assert apalike_object().add_author().author == "von der Spaaks Jr., J. H."
 
     def test_check_cffobj(self):
         apalike_object().check_cffobj()

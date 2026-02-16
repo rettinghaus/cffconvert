@@ -141,7 +141,7 @@ class ApalikeAuthor(BaseAuthor):
         return self._author.get("alias")
 
     def _from_given_and_last(self):
-        return self._get_full_last_name() + " " + self._get_initials()
+        return self._get_full_last_name() + ", " + self._get_initials()
 
     def _from_given(self):
         return self._author.get("given-names")
