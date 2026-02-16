@@ -154,7 +154,7 @@ class ApalikeAuthor(BaseAuthor):
 
     def _get_initials(self):
         given_names = self._author.get("given-names").split(" ")
-        return "".join([given_name[0] + "." for given_name in given_names])
+        return " ".join([given_name[0] + "." for given_name in given_names])
 
     def as_string(self):
         key = self._get_key()
