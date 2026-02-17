@@ -19,10 +19,8 @@ class ApalikeObject(Shared):
             pass
         elif n_authors == 1:
             self.author = ", ".join(authors_apalike_filtered)
-        elif n_authors == 2:
-            self.author = ", ".join(authors_apalike_filtered[:-1]) + " and " + authors_apalike_filtered[-1]
         else:
-            self.author = ", ".join(authors_apalike_filtered[:-1]) + ", and " + authors_apalike_filtered[-1]
+            self.author = ", ".join(authors_apalike_filtered[:-1]) + ", & " + authors_apalike_filtered[-1]
         if self.author[-1] != ".":
             self.author += "."
         return self
