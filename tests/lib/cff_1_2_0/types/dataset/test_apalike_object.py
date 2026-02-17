@@ -1,10 +1,8 @@
 import os
 from functools import lru_cache
-
 import pytest
 from cffconvert import Citation
 from cffconvert.lib.cff_1_2_x.apalike import ApalikeObject
-
 from tests.lib.contracts.apalike import Contract
 
 
