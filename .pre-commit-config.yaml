@@ -23,7 +23,7 @@ repos:
         name: Assessing the package metadata using 'pyroma'
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.11
+    rev: v0.17.0
     hooks:
       - id: ruff
         name: Linting using 'ruff'
