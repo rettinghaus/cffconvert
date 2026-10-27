@@ -1,3 +1,4 @@
+from pathlib import Path
 import pytest
 from click.testing import CliRunner
 from cffconvert.cli.cli import cli as cffconvert
@@ -44,8 +45,7 @@ def test_printing_on_stdout(fmt, fname, cffstr):
     expected = read_sibling_file(__file__, fname)
     runner = CliRunner()
     with runner.isolated_filesystem():
-        with open("CITATION.cff", "wt", encoding="utf-8") as fid:
-            fid.write(cffstr)
+        Path("CITATION.cff").write_text(cffstr, encoding="utf-8")
         result = runner.invoke(cffconvert, ["-f", fmt])
     assert result.exit_code == 0
     actual = result.output
@@ -56,8 +56,7 @@ def test_printing_on_stdout(fmt, fname, cffstr):
 def test_raising_error_on_unsupported_format(cffstr):
     runner = CliRunner()
     with runner.isolated_filesystem():
-        with open("CITATION.cff", "wt", encoding="utf-8") as fid:
-            fid.write(cffstr)
+        Path("CITATION.cff").write_text(cffstr, encoding="utf-8")
         result = runner.invoke(cffconvert, ["-f", "unsupported_97491"])
     assert result.exit_code == 2
     assert "Error: Invalid value for '-f'" in str(result.output)
@@ -79,10 +78,8 @@ def test_writing_to_file(fmt, fname, cffstr):
     expected = read_sibling_file(__file__, fname)
     runner = CliRunner()
     with runner.isolated_filesystem():
-        with open("CITATION.cff", "wt", encoding="utf-8") as fid:
-            fid.write(cffstr)
+        Path("CITATION.cff").write_text(cffstr, encoding="utf-8")
         result = runner.invoke(cffconvert, ["-f", fmt, "-o", fname])
-        with open(fname, "rt", encoding="utf-8") as fid:
-            actual = fid.read()
+        actual = Path(fname).read_text(encoding="utf-8")
     assert result.exit_code == 0
     assert expected == actual
