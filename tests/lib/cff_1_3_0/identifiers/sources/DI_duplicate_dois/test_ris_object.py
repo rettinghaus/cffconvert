@@ -1,5 +1,5 @@
+import os
 from functools import lru_cache
-from pathlib import Path
 import pytest
 from cffconvert import Citation
 from cffconvert.lib.cff_1_3_x.ris import RisObject
@@ -8,10 +8,11 @@ from tests.lib.contracts.ris import Contract
 
 @lru_cache
 def ris_object():
-    fixture = Path(__file__).parent / "CITATION.cff"
-    cffstr = fixture.read_text(encoding="utf-8")
-    citation = Citation(cffstr)
-    return RisObject(citation.cffobj, initialize_empty=True)
+    fixture = os.path.join(os.path.dirname(__file__), "CITATION.cff")
+    with open(fixture, "rt", encoding="utf-8") as f:
+        cffstr = f.read()
+        citation = Citation(cffstr)
+        return RisObject(citation.cffobj, initialize_empty=True)
 
 
 @pytest.mark.lib
@@ -23,8 +24,9 @@ class TestRisObject(Contract):
 
     def test_as_string(self):
         actual_ris = ris_object().add_all().as_string()
-        fixture = Path(__file__).parent / "ris.txt"
-        expected_ris = fixture.read_text(encoding="utf-8")
+        fixture = os.path.join(os.path.dirname(__file__), "ris.txt")
+        with open(fixture, "rt", encoding="utf-8") as f:
+            expected_ris = f.read()
         assert actual_ris == expected_ris
 
     def test_author(self):

@@ -1,5 +1,5 @@
+import os
 from functools import lru_cache
-from pathlib import Path
 import pytest
 from cffconvert import Citation
 from cffconvert.lib.cff_1_2_x.codemeta import CodemetaObject
@@ -8,10 +8,11 @@ from tests.lib.contracts.codemeta import Contract
 
 @lru_cache
 def codemeta_object():
-    fixture = Path(__file__).parent / "CITATION.cff"
-    cffstr = fixture.read_text(encoding="utf-8")
-    citation = Citation(cffstr)
-    return CodemetaObject(citation.cffobj, initialize_empty=True)
+    fixture = os.path.join(os.path.dirname(__file__), "CITATION.cff")
+    with open(fixture, "rt", encoding="utf-8") as f:
+        cffstr = f.read()
+        citation = Citation(cffstr)
+        return CodemetaObject(citation.cffobj, initialize_empty=True)
 
 
 @pytest.mark.lib
@@ -68,6 +69,7 @@ class TestCodemetaObject(Contract):
 
     def test_as_string(self):
         actual_codemeta = codemeta_object().add_all().as_string()
-        fixture = Path(__file__).parent / "codemeta.json"
-        expected_codemeta = fixture.read_text(encoding="utf-8")
+        fixture = os.path.join(os.path.dirname(__file__), "codemeta.json")
+        with open(fixture, "rt", encoding="utf-8") as f:
+            expected_codemeta = f.read()
         assert actual_codemeta == expected_codemeta

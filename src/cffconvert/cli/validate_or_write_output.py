@@ -1,4 +1,3 @@
-from pathlib import Path
 import click
 from jsonschema.exceptions import ValidationError as JsonschemaSchemaError
 from pykwalify.errors import SchemaError as PykwalifySchemaError
@@ -38,7 +37,8 @@ def validate_or_write_output(outfile, outputformat, validate_only, citation, ver
         if outfile is None:
             print(outstr, end="")
         else:
-            Path(outfile).write_text(outstr, encoding="utf-8")
+            with open(outfile, "w", encoding="utf8") as fid:
+                fid.write(outstr)
     else:
         # shouldn't happen
         raise ValueError("Something went wrong validating or writing the output")

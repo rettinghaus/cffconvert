@@ -1,4 +1,4 @@
-from pathlib import Path
+import os
 import pytest
 
 
@@ -16,5 +16,7 @@ def get_formats():
 
 
 def read_sibling_file(myfile, filename):
-    fixture = Path(myfile).parent / filename
-    return fixture.read_text(encoding="utf-8")
+    mydir = os.path.dirname(myfile)
+    fixture = os.path.join(mydir, filename)
+    with open(fixture, "rt", encoding="utf-8") as fid:
+        return fid.read()
