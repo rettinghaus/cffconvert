@@ -1,5 +1,5 @@
 # pylint: disable=too-many-return-statements
-import os
+from pathlib import Path
 from flask import Response
 from jsonschema.exceptions import ValidationError as JsonschemaSchemaError
 from pykwalify.errors import SchemaError as PykwalifySchemaError
@@ -9,9 +9,8 @@ from cffconvert.cli.read_from_url import read_from_url
 
 
 def get_help_text():
-    p = os.path.join(os.path.dirname(__file__), "index.html")
-    with open(p, "rt", encoding="utf-8") as fid:
-        return fid.read()
+    p = Path(__file__).parent / "index.html"
+    return p.read_text(encoding="utf-8")
 
 
 def cffconvert(request):
