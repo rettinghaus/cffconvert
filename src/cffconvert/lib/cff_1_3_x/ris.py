@@ -19,6 +19,8 @@ class RisObject(Shared):
     def add_date(self):
         if "date-released" in self.cffobj.keys():
             self.date = f"DA  - {self.cffobj['date-released']}\n"
+        elif "date-published" in self.cffobj.keys():
+            self.date = f"DA  - {self.cffobj['date-published']}\n"
         return self
 
     def add_doi(self):
@@ -39,4 +41,8 @@ class RisObject(Shared):
     def add_year(self):
         if "date-released" in self.cffobj.keys():
             self.year = f"PY  - {self.cffobj['date-released'][:4]}\n"
+        elif "year" in self.cffobj.keys():
+            self.year = f"PY  - {self.cffobj['year']}\n"
+        elif "date-published" in self.cffobj.keys():
+            self.year = f"PY  - {str(self.cffobj['date-published'])[:4]}\n"
         return self

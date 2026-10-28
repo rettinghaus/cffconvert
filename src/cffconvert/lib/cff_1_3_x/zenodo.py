@@ -31,6 +31,8 @@ class ZenodoObject(Shared):
     def add_publication_date(self):
         if "date-released" in self.cffobj.keys():
             self.publication_date = self.cffobj["date-released"]
+        elif "date-published" in self.cffobj.keys():
+            self.publication_date = self.cffobj["date-published"]
         return self
 
     def add_upload_type(self):

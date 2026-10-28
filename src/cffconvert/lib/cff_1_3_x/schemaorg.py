@@ -36,6 +36,8 @@ class SchemaorgObject(Shared):
     def add_date_published(self):
         if "date-released" in self.cffobj.keys():
             self.date_published = self.cffobj["date-released"]
+        elif "date-published" in self.cffobj.keys():
+            self.date_published = self.cffobj["date-published"]
         return self
 
     def add_identifier(self):

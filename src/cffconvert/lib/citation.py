@@ -17,10 +17,19 @@ class Citation:
     }
     supported_cff_versions = _implementations.keys()
 
-    def __init__(self, cffstr, src=None):
+    def __init__(self, cffstr, src=None, preferred_citation=False, reference=None, suspect_key=None):
         self.src = src
         self.cffversion = self._get_cff_version(cffstr)
-        self._implementation = Citation._implementations[self.cffversion](cffstr, self.cffversion)
+
+        if suspect_key is not None:
+            if suspect_key == "preferred-citation":
+                preferred_citation = True
+            elif suspect_key.startswith("references/") or suspect_key.isdigit():
+                reference = int(suspect_key.split("/")[-1])
+
+        self._implementation = Citation._implementations[self.cffversion](
+            cffstr, self.cffversion, preferred_citation=preferred_citation, reference=reference
+        )
 
     @staticmethod
     def _get_cff_version(cffstr):

@@ -22,11 +22,14 @@ class Citation_1_3_x(Contract):  # noqa
         "1.3.0"
     ]
 
-    def __init__(self, cffstr, cffversion):
+    def __init__(self, cffstr, cffversion, preferred_citation=False, reference=None):
         self.cffstr = cffstr
         self.cffversion = cffversion
-        self.cffobj = self._parse()
+        self.preferred_citation = preferred_citation
+        self.reference = reference
+        self.raw_cffobj = self._parse()
         self.schema = self._get_schema()
+        self.cffobj = self._select_cffobj()
 
     def _get_schema(self):
         schema_path = os.path.join(get_package_root(), "schemas", "1.3.0", "schema.json")
@@ -54,6 +57,41 @@ class Citation_1_3_x(Contract):  # noqa
 
         return cffobj
 
+    def _select_cffobj(self):
+        if self.preferred_citation and self.reference is not None:
+            raise ValueError("Specify either preferred_citation or reference, not both.")
+
+        if self.preferred_citation:
+            if "preferred-citation" not in self.raw_cffobj:
+                raise KeyError("No 'preferred-citation' key found in CITATION.cff.")
+            pref = self.raw_cffobj["preferred-citation"]
+            if not isinstance(pref, dict):
+                raise ValueError("Expected 'preferred-citation' to be a dictionary.")
+            cffobj = pref.copy()
+            cffobj["cff-version"] = self.cffversion
+            return cffobj
+
+        if self.reference is not None:
+            if "references" not in self.raw_cffobj:
+                raise KeyError("No 'references' key found in CITATION.cff.")
+            refs = self.raw_cffobj["references"]
+            if not isinstance(refs, list):
+                raise ValueError("Expected 'references' to be a list.")
+            try:
+                idx = int(self.reference)
+            except (ValueError, TypeError):
+                raise ValueError(f"Reference index must be an integer, got '{self.reference}'.")
+            if idx < 0 or idx >= len(refs):
+                raise IndexError(f"Reference index {idx} out of bounds (0..{len(refs)-1}).")
+            ref = refs[idx]
+            if not isinstance(ref, dict):
+                raise ValueError(f"Expected reference item at index {idx} to be a dictionary.")
+            cffobj = ref.copy()
+            cffobj["cff-version"] = self.cffversion
+            return cffobj
+
+        return self.raw_cffobj
+
     def as_apalike(self):
         return ApalikeObject(self.cffobj).as_string()
 
@@ -80,7 +118,7 @@ class Citation_1_3_x(Contract):  # noqa
 
     def validate(self, verbose=True):
         try:
-            jsonschema.validate(instance=self.cffobj, schema=self.schema, format_checker=jsonschema.FormatChecker())
+            jsonschema.validate(instance=self.raw_cffobj, schema=self.schema, format_checker=jsonschema.FormatChecker())
         except ValidationError as error:
             error_lines = str(error).splitlines()
             n_lines_max = 15

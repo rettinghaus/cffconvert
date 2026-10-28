@@ -31,6 +31,8 @@ class BibtexObject(Shared):
         if "date-released" in self.cffobj.keys():
             month = self.cffobj["date-released"].split("-")[1].lstrip("0")
             self.month = "month = {" + month + "}"
+        elif "month" in self.cffobj.keys():
+            self.month = "month = {" + str(self.cffobj["month"]) + "}"
         return self
 
     def add_url(self):
@@ -40,4 +42,8 @@ class BibtexObject(Shared):
     def add_year(self):
         if "date-released" in self.cffobj.keys():
             self.year = "year = {" + self.cffobj["date-released"][:4] + "}"
+        elif "year" in self.cffobj.keys():
+            self.year = "year = {" + str(self.cffobj["year"]) + "}"
+        elif "date-published" in self.cffobj.keys():
+            self.year = "year = {" + str(self.cffobj["date-published"])[:4] + "}"
         return self

@@ -34,4 +34,8 @@ class EndnoteObject(Shared):
     def add_year(self):
         if "date-released" in self.cffobj.keys():
             self.year = f"%D {self.cffobj['date-released'][:4]}\n"
+        elif "year" in self.cffobj.keys():
+            self.year = f"%D {self.cffobj['year']}\n"
+        elif "date-published" in self.cffobj.keys():
+            self.year = f"%D {str(self.cffobj['date-published'])[:4]}\n"
         return self

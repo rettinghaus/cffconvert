@@ -28,6 +28,10 @@ class ApalikeObject(Shared):
     def add_year(self):
         if "date-released" in self.cffobj.keys():
             self.year = "(" + self.cffobj["date-released"].split("-")[0] + ")."
+        elif "year" in self.cffobj.keys():
+            self.year = "(" + str(self.cffobj["year"]) + ")."
+        elif "date-published" in self.cffobj.keys():
+            self.year = "(" + str(self.cffobj["date-published"]).split("-")[0] + ")."
         return self
 
     def add_doi(self):
