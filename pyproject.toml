@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=77.0"]
 build-backend = "setuptools.build_meta"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -66,8 +66,7 @@ dev = [
     "pre-commit",
     "prospector == 1.10.2",
     "pyroma == 4.2",
-    "ruff == 0.0.278",
-    "setuptools < 80"
+    "ruff >= 0.2.0"
 ]
 gcloud = [
     "flask"
