@@ -1,9 +1,10 @@
 from pathlib import Path
+
 import pytest
 from click.testing import CliRunner
+
 from cffconvert.cli.cli import cli as cffconvert
-from tests.cli.helpers import get_formats
-from tests.cli.helpers import read_sibling_file
+from tests.cli.helpers import get_formats, read_sibling_file
 
 
 @pytest.fixture(scope="module")

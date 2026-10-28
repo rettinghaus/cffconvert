@@ -1,9 +1,10 @@
 import json
 from pathlib import Path
+
 import jsonschema
 from jsonschema.exceptions import ValidationError
-from ruamel.yaml import SafeConstructor
-from ruamel.yaml import YAML
+from ruamel.yaml import YAML, SafeConstructor
+
 from cffconvert.lib.cff_1_2_x.apalike import ApalikeObject
 from cffconvert.lib.cff_1_2_x.bibtex import BibtexObject
 from cffconvert.lib.cff_1_2_x.codemeta import CodemetaObject

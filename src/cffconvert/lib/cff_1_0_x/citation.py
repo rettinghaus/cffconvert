@@ -1,7 +1,8 @@
 from pathlib import Path
+
 from pykwalify.core import Core
-from ruamel.yaml import SafeConstructor
-from ruamel.yaml import YAML
+from ruamel.yaml import YAML, SafeConstructor
+
 from cffconvert.lib.cff_1_0_x.apalike import ApalikeObject
 from cffconvert.lib.cff_1_0_x.bibtex import BibtexObject
 from cffconvert.lib.cff_1_0_x.codemeta import CodemetaObject

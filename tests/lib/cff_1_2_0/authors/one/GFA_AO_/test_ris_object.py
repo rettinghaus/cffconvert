@@ -1,6 +1,8 @@
 from functools import lru_cache
 from pathlib import Path
+
 import pytest
+
 from cffconvert import Citation
 from cffconvert.lib.cff_1_2_x.ris import RisObject
 from tests.lib.contracts.ris import Contract

@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import click
 from jsonschema.exceptions import ValidationError as JsonschemaSchemaError
 from pykwalify.errors import SchemaError as PykwalifySchemaError
