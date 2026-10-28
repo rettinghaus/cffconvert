@@ -64,7 +64,7 @@ dev = [
     "build",
     "isort == 5.12.0",
     "pre-commit",
-    "prospector == 1.10.2",
+    "prospector >= 1.11.0",
     "pyroma == 4.2",
     "ruff >= 0.2.0"
 ]
