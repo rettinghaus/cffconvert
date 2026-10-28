@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=77.0"]
+requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -16,6 +16,7 @@ classifiers = [
     "Intended Audience :: Information Technology",
     "Intended Audience :: Science/Research",
     "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: Apache Software License",
     "Natural Language :: English",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
@@ -45,7 +46,7 @@ keywords = [
     "CodeMeta",
     "Zenodo"
 ]
-license = "Apache-2.0"
+license = {text = "Apache Software License"}
 name = "cffconvert"
 readme = "README.md"
 requires-python = ">=3.8"
