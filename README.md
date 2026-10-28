@@ -38,7 +38,7 @@ Command line program to validate and convert [`CITATION.cff`](https://github.com
 6. schema.org JSON
 7. Zenodo JSON
 
-You can also convert metadata from the `preferred-citation` key using `-p` / `--preferred-citation` or items from the `references` list using `-r` / `--reference <index>`.
+`cffconvert` does not support converting items from `references` or `preferred-citation` keys at the moment.
 
 ## Installing
 
@@ -105,9 +105,6 @@ Options:
                                   Output format.
   -u, --url TEXT                  URL to the CITATION.cff input file.
   -h, --help                      Show help and exit.
-  -p, --preferred-citation        Convert metadata from preferred-citation key.
-  -r, --reference INTEGER         Index of reference item to convert from
-                                  references key (0-indexed).
   --show-trace                    Show error trace.
   --validate                      Validate the CITATION.cff file and exit.
   --version                       Print version and exit.
@@ -152,15 +149,6 @@ cffconvert -f ris
 cffconvert -f schema.org
 cffconvert -f zenodo
 cffconvert -f apalike
-```
-
-To convert metadata from `preferred-citation` or an item from `references`:
-
-```shell
-cffconvert -f bibtex --preferred-citation
-cffconvert -f bibtex -p
-cffconvert -f bibtex --reference 0
-cffconvert -f bibtex -r 0
 ```
 
 ### Writing to a file

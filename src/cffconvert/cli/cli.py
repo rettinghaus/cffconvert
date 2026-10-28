@@ -63,16 +63,6 @@ options = {
         "is_flag": True,
         "default": False,
         "help": "Control output verbosity."
-    },
-    "preferred_citation": {
-        "is_flag": True,
-        "default": False,
-        "help": "Convert metadata from preferred-citation key."
-    },
-    "reference": {
-        "type": int,
-        "default": None,
-        "help": "Index of reference item to convert from references key (0-indexed)."
     }
 }
 epilog = """If this program is useful to you, consider giving it a star on GitHub:
@@ -85,14 +75,12 @@ https://github.com/citation-file-format/cffconvert"""
 @click.option("-f", "--format", "outputformat", **options["outputformat"])
 @click.option("-u", "--url", "url", **options["url"])
 @click.option("-h", "--help", "show_help", **options["show_help"])
-@click.option("-p", "--preferred-citation", "preferred_citation", **options["preferred_citation"])
-@click.option("-r", "--reference", "reference", **options["reference"])
 @click.option("--show-trace", "show_trace", **options["show_trace"])
 @click.option("--validate", "validate_only", **options["validate_only"])
 @click.option("--version", "version", **options["version"])
 @click.option("--verbose", "verbose", **options["verbose"])
 # pylint: disable=too-many-arguments
-def cli(infile, outfile, outputformat, url, show_help, preferred_citation, reference, show_trace, validate_only, version, verbose):
+def cli(infile, outfile, outputformat, url, show_help, show_trace, validate_only, version, verbose):
     """Command line program to validate and convert CITATION.cff files."""
 
     check_early_exits(show_help, version)
@@ -106,7 +94,7 @@ def cli(infile, outfile, outputformat, url, show_help, preferred_citation, refer
         infile = "CITATION.cff"
 
     # load the citation metadata from the specified source and create a Python object representation of it
-    citation = create_citation(infile, url, preferred_citation=preferred_citation, reference=reference)
+    citation = create_citation(infile, url)
 
     # either validate and exit, or convert to the selected output format
     validate_or_write_output(outfile, outputformat, validate_only, citation, verbose)

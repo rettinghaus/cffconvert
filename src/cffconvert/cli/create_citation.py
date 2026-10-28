@@ -3,7 +3,7 @@ from cffconvert.cli.read_from_url import read_from_url
 from cffconvert.lib.citation import Citation
 
 
-def create_citation(infile, url, preferred_citation=False, reference=None):
+def create_citation(infile, url):
     condition = (infile is None, url is None)
     if condition == (True, True):
         # neither has been defined, raise
@@ -15,10 +15,10 @@ def create_citation(infile, url, preferred_citation=False, reference=None):
 
     if condition == (True, False):
         cffstr = read_from_url(url)
-        return Citation(cffstr, src=url, preferred_citation=preferred_citation, reference=reference)
+        return Citation(cffstr, src=url)
 
     if condition == (False, True):
         cffstr = read_from_file(infile)
-        return Citation(cffstr, src=infile, preferred_citation=preferred_citation, reference=reference)
+        return Citation(cffstr, src=infile)
 
     raise ValueError("Something went wrong creating the citation object.")
