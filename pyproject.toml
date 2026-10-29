@@ -1,11 +1,8 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=77.0"]
 build-backend = "setuptools.build_meta"
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 [project]
-# https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#declaring-project-metadata
 authors = [
     { name = "Jurriaan H. Spaaks", email = "j.spaaks@esciencecenter.nl" }
 ]
@@ -16,14 +13,14 @@ classifiers = [
     "Intended Audience :: Information Technology",
     "Intended Audience :: Science/Research",
     "Intended Audience :: System Administrators",
-    "License :: OSI Approved :: Apache Software License",
     "Natural Language :: English",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     "Topic :: Scientific/Engineering",
     "Topic :: Software Development",
     "Topic :: Utilities"
@@ -46,28 +43,24 @@ keywords = [
     "CodeMeta",
     "Zenodo"
 ]
-license = {text = "Apache Software License"}
+license = "Apache-2.0"
 name = "cffconvert"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 version = "3.0.0a0"
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 [project.urls]
 Changelog = "https://github.com/citation-file-format/cffconvert/blob/main/CHANGELOG.md"
 Repository = "https://github.com/citation-file-format/cffconvert"
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 [project.optional-dependencies]
 dev = [
     "build",
     "isort == 5.12.0",
     "pre-commit",
-    "prospector == 1.10.2",
+    "prospector >= 1.11.0",
     "pyroma == 4.2",
-    "ruff == 0.0.278"
+    "ruff >= 0.2.0"
 ]
 gcloud = [
     "flask"
@@ -81,17 +74,11 @@ testing = [
     "pytest-cov"
 ]
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 [project.scripts]
 cffconvert = "cffconvert.cli.cli:cli"
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 [tool.setuptools.packages.find]
 where = ["src"]
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 [tool.isort]
 force_alphabetical_sort_within_sections = true
@@ -102,11 +89,7 @@ lines_after_imports = 2
 lines_between_sections = 0
 src_paths = ["src", "tests"]
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 [tool.pytest.ini_options]
-# Note that visual debugger in some editors like pycharm gets confused by coverage calculation.
-# As a workaround, configure the test configuration in pycharm et al with a --no-cov argument
 addopts = "--no-cov --verbose --maxfail=1 --strict-markers --import-mode=importlib --cache-clear --strict-config"
 markers = [
     "apalike: Tests pertaining to 'apalike' export behavior",
@@ -114,7 +97,7 @@ markers = [
     "cli: Tests pertaining to cffconvert's command line interface",
     "codemeta: Tests pertaining to 'codemeta' export behavior",
     "endnote: Tests pertaining to 'endnote' export behavior",
-    "lib: Tests pertaining to cffconvert's library",
+    "lib: Tests pertaining to 'lib' export behavior",
     "ris: Tests pertaining to 'ris' export behavior",
     "schemaorg: Tests pertaining to 'schema.org' export behavior",
     "zenodo: Tests pertaining to 'zenodo' export behavior",
@@ -128,14 +111,12 @@ testpaths = [
     "tests"
 ]
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 [tool.ruff]
 line-length = 120
+
+[tool.ruff.lint]
 select = ["E", "F", "W", "C901", "Q"]
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-[tool.ruff.flake8-quotes]
+[tool.ruff.lint.flake8-quotes]
 docstring-quotes = "double"
 inline-quotes = "double"
